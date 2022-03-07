@@ -4,8 +4,12 @@
 
 None                                                           S. Turner
 Internet-Draft                                                     sn3rd
-Intended status: Standards Track                         14 January 2022
-Expires: 18 July 2022
+Intended status: Standards Track                           P. Kampanakis
+Expires: 8 September 2022                                     J. Massimo
+                                                                     AWS
+                                                           B. Westerbaan
+                                                              Cloudflare
+                                                            7 March 2022
 
 
 Algorithm Identifiers for NIST's PQC Algorithms for Use in the Internet
@@ -18,8 +22,35 @@ Abstract
    format for the US NIST's PQC KEM (United States National Institute of
    Standards and Technology's Post Quantum Cryptography Key
    Encapsulation Mechanism) algorithms.  The algorithms covered are
-   Candidate 1 and Candidate 2.  The encoding for public key and private
-   key is also provided.
+   Candidate TBD1.  The encoding for public key and private key is also
+   provided.
+
+   /[EDNOTE: This draft is not expected to be finalized before the NIST
+   PQC Project has standardized PQ algorithms.  After NIST has
+   standardized its first algorithms, this document will replace TBD,
+   with the appropriate algorithms and parameters before proceeding to
+   ratification.  The algorithm Dilithium has been added as an example
+   in this draft, to provide a more detailed illustration of the content
+   - it by no means indicates its inclusion in the final version.  This
+   specification will use object identifiers for the new algorithms that
+   are assigned by NIST, and will use placeholders until these are
+   released.]
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-turner-lamps-nist-pqc-kem/.
+
+   Discussion of this document takes place on the Limited Additional
+   Mechanisms for PKIX and SMIME (lamps) Working Group mailing list
+   (mailto:spasm@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/spasm/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ seanturner/draft-turner-lamps-nist-pqc-kem-
+   certificates.
 
 Status of This Memo
 
@@ -36,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2022.
+   This Internet-Draft will expire on 8 September 2022.
 
 Copyright Notice
 
@@ -57,31 +88,38 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Algorithm Identifiers
-   4.  Candidate 1
-   5.  Candidate 2
-   6.  Subject Public Key Fields
-   7.  Key Usage Bits
-   8.  Private Key Format
-   9.  ASN.1 Module
-   10. Security Considerations
-   11. IANA Considerations
-   12. References
-     12.1.  Normative References
-     12.2.  Informative References
+   4.  Candidate TBD1
+   5.  Subject Public Key Fields
+   6.  Key Usage Bits
+   7.  Private Key Format
+   8.  ASN.1 Module
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
-   The US NIST PQC competition has selected the Candidate 1 and
-   Candidate 2 algorithms as winners of their PQC competition [PQCComp].
-   These algorithms are KEM algorithms.  NIST has also defined object
-   identifiers for these algorithms (TODO insert reference).
+   The US NIST PQC Project has selected the Candidate TBD1 algorithms as
+   winners of their PQC Project [PQCProj].  These algorithms are KEM
+   algorithms.  NIST has also defined object identifiers for these
+   algorithms (TODO insert reference).
 
-   This document specifies the use of the Candidate 1 and Candidate 2
-   algorithms in X.509 public key certifiates, see [RFC5280].  It also
-   specifies private key encoding.  An ASN.1 module is included for
-   reference purposes.
+   This document specifies the use of the Candidate TBD1 algorithms in
+   X.509 public key certifiates, see [RFC5280].  It also specifies
+   private key encoding.  An ASN.1 module is included for reference
+   purposes.
+
+   These certificates could be used as Issuers in CMS where the public
+   key is used to encapsulate a shared secret used to derive a symmetric
+   key used to encrypt content in CMS [EDNOTE: Add reference draft-
+   perret-prat-lamps-cms-pq-kem].  To be used in TLS, these certificates
+   could only be used as end-entity identity certificates and would
+   require significant updates to the protocol [EDNOTE: Add reference
+   draft-celi-wiggers-tls-authkem].
 
 2.  Conventions and Definitions
 
@@ -101,8 +139,10 @@ Table of Contents
    The AlgorithmIdentifier type, which is included herein for
    convenience, is defined as follows:
 
-   AlgorithmIdentifier ::= SEQUENCE { algorithm OBJECT IDENTIFIER,
-   parameters ANY DEFINED BY algorithm OPTIONAL }
+      AlgorithmIdentifier  ::=  SEQUENCE  {
+          algorithm   OBJECT IDENTIFIER,
+          parameters  ANY DEFINED BY algorithm OPTIONAL
+      }
 
       |  NOTE: The above syntax is from [RFC5280] and matches the
       |  version used therein, i.e., the 1988 ASN.1 syntax.  See
@@ -111,8 +151,7 @@ Table of Contents
    The fields in AlgorithmIdentifier have the following meanings:
 
    *  algorithm identifies the cryptographic algorithm with an object
-      identifier.  XXX such OIDs are defined in Sections Section 4 and
-      Section 5.
+      identifier.  XXX such OIDs are defined in Sections Section 4.
 
    *  parameters, which are optional, are the associated parameters for
       the algorithm identifier in the algorithm field.
@@ -128,15 +167,11 @@ Table of Contents
    where this is not possible, the problem needs to be restricted to
    that subsystem and not propagated to the Internet.
 
-4.  Candidate 1
+4.  Candidate TBD1
 
    TODO insert object-identifiers
 
-5.  Candidate 2
-
-   TODO insert object identifiers
-
-6.  Subject Public Key Fields
+5.  Subject Public Key Fields
 
    In the X.509 certificate, the subjectPublicKeyInfo field has the
    SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
@@ -166,14 +201,14 @@ Table of Contents
      TODO insert example public key
      -----END PUBLIC KEY-------
 
-7.  Key Usage Bits
+6.  Key Usage Bits
 
    The intended application for the key is indicated in the keyUsage
    certificate extension; see Section 4.2.1.3 of [RFC5280].
 
    If the keyUsage extension is present in a certificate that indicates
-   Candidate 1 or Candidate 2 in SubjectPublicKeyInfo, then the
-   following MUST be present:
+   Candidate TBD1 in SubjectPublicKeyInfo, then the following MUST be
+   present:
 
      keyEncipherment;
 
@@ -182,7 +217,7 @@ Table of Contents
      encipherOnly; or
      decipherOnly.
 
-8.  Private Key Format
+7.  Private Key Format
 
    "Asymmetric Key Packages" [RFC5958] describes how to encode a private
    key in a structure that both identifies what algorithm the private
@@ -242,21 +277,24 @@ Table of Contents
       |  to do a consistency check on the key pair and widest ability to
       |  import the key.
 
-9.  ASN.1 Module
+8.  ASN.1 Module
 
    TODO ASN.1 Module
 
-10.  Security Considerations
+9.  Security Considerations
 
-   TODO Security
+   This document updates [RFC3279].  The Security Considerations section
+   of that document therefore applies to this specification as well.
 
-11.  IANA Considerations
+   [EDNOTE: Discuss side-channels for Dilithium.]
+
+10.  IANA Considerations
 
    This document will have some IANA actions.
 
-12.  References
+11.  References
 
-12.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -282,12 +320,18 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-12.2.  Informative References
+11.2.  Informative References
 
-   [PQCComp]  National Insititue of Standards and Technology, "Post-
+   [PQCProj]  National Insititue of Standards and Technology, "Post-
               Quantum Cryptography Project", 20 December 2016,
               <https://csrc.nist.gov/projects/post-quantum-
               cryptography>.
+
+   [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
+              Identifiers for the Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 3279, DOI 10.17487/RFC3279, April
+              2002, <https://www.rfc-editor.org/rfc/rfc3279>.
 
    [RFC7468]  Josefsson, S. and S. Leonard, "Textual Encodings of PKIX,
               PKCS, and CMS Structures", RFC 7468, DOI 10.17487/RFC7468,
@@ -297,9 +341,23 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Sean Turner
    sn3rd
-
    Email: sean@sn3rd.com
+
+
+   Panos Kampanakis
+   AWS
+   Email: kpanos@amazon.com
+
+
+   Jake Massimo
+   AWS
+   Email: jakemas@amazon.com
+
+
+   Bas Westerbaan
+   Cloudflare
+   Email: bas@westerbaan.name
