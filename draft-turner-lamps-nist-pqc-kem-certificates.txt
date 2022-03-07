@@ -50,7 +50,7 @@ About This Document
    https://mailarchive.ietf.org/arch/browse/spasm/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/ seanturner/draft-turner-lamps-nist-pqc-kem-
+   https://github.com/seanturner/draft-turner-lamps-nist-pqc-kem-
    certificates.
 
 Status of This Memo
