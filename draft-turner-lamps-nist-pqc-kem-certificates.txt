@@ -318,7 +318,7 @@ Table of Contents
 
 11.2.  Informative References
 
-   [PQCProj]  National Insititue of Standards and Technology, "Post-
+   [PQCProj]  National Institute of Standards and Technology, "Post-
               Quantum Cryptography Project", 20 December 2016,
               <https://csrc.nist.gov/projects/post-quantum-
               cryptography>.
