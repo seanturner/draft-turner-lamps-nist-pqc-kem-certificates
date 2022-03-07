@@ -212,11 +212,6 @@ Table of Contents
 
      keyEncipherment;
 
-   all of the following MUST be present:
-
-     encipherOnly; or
-     decipherOnly.
-
 7.  Private Key Format
 
    "Asymmetric Key Packages" [RFC5958] describes how to encode a private
